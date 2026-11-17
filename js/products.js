@@ -79,9 +79,11 @@ const products = [
 
         description:
             "Paket 5 template website modern untuk " +
-            "kebutuhan personal maupun bisnis. " +
-            "Tinggal pilih gaya, ganti teks dan gambar, " +
-            "lalu pakai.",
+            "kebutuhan personal maupun bisnis: AURELIA " +
+            "(company profile), NEXORA & YOURBRAND " +
+            "(form kontak langsung ke WhatsApp), NOVA " +
+            "(SaaS gelap + tabel harga), dan ORION " +
+            "(studio dengan aksen lime).",
 
         image: "images/products/website-template.png",
 
@@ -118,21 +120,6 @@ const products = [
     },
 
 
-    /* =====================================================
-       3. E-BOOK PROGRAMMING
-       -----------------------------------------------------
-       PENTING: daftar judul e-book BELUM ada di repo ini.
-       Isi bagian `options` dengan judul e-book yang
-       BENAR-BENAR kamu kirim, memakai format di bawah ini.
-       Contoh:
-           options: [
-               { name: "Judul E-Book 1", note: "Isi singkat" },
-               { name: "Judul E-Book 2", note: "Isi singkat" }
-           ]
-       Selama dibiarkan kosong, kartu tetap tampil dan
-       tombol beli tetap aktif (tampilan tidak berubah).
-    ===================================================== */
-
     {
         id: 3,
         name: "E-Book Programming",
@@ -144,12 +131,27 @@ const products = [
         price: "Rp99.000",
 
         description:
-            "Panduan programming dasar untuk kamu yang " +
-            "ingin mulai coding.",
+            "Delapan bab dari pengenalan web sampai " +
+            "menerbitkan website gratis: HTML, CSS, " +
+            "JavaScript, proyek praktik landing page, " +
+            "lengkap dengan latihan dan kunci jawaban.",
 
         image: "images/products/ebook-programming.png",
 
-        options: [],
+        options: [
+            {
+                name: "PDF 12 halaman",
+                note: "Siap dibaca di HP atau dicetak — EBOOK-HTML-CSS-JAVASCRIPT-UNTUK-PEMULA.pdf"
+            },
+            {
+                name: "Versi HTML + CSS",
+                note: "ebook.html & ebook-style.css — dibuka di browser, huruf bisa diperbesar"
+            },
+            {
+                name: "README & lisensi",
+                note: "Cara baca, cara cetak, dan lisensi penggunaan file"
+            }
+        ],
 
         link: SITE_CONFIG.storeUrl,
         buttonText: "Buy Now",
@@ -173,10 +175,27 @@ const products = [
         price: "Rp159.000",
 
         description:
-            "Kumpulan tools dan resources AI untuk " +
-            "meningkatkan produktivitas.",
+            "Panduan AI untuk kerja harian: 9 alat AI " +
+            "dijelaskan fungsinya dan biayanya, anatomi " +
+            "prompt R-C-T-X, plus 19 prompt siap tempel " +
+            "untuk kantor, kuliah, dan konten.",
 
         image: "images/products/ai-tools.png",
+
+        options: [
+            {
+                name: "PDF 10 halaman",
+                note: "PANDUAN-AI-PRODUCTIVITY-TOOLS.pdf — seluruh isi panduan"
+            },
+            {
+                name: "Versi HTML + CSS",
+                note: "ai.html & ai-style.css — navigasi bab, dibaca nyaman di browser"
+            },
+            {
+                name: "README & lisensi",
+                note: "Cara pakai prompt dan lisensi penggunaan file"
+            }
+        ],
 
         link: SITE_CONFIG.storeUrl,
 
@@ -201,10 +220,35 @@ const products = [
         price: "Rp50.000",
 
         description:
-            "Kumpulan komponen UI modern untuk kebutuhan " +
-            "desain digital.",
+            "Set token desain untuk web, iOS, dan Android: " +
+            "warna, huruf, ruang, serta komponen siap pakai " +
+            "(tombol, kartu, form, badge, switch) lengkap " +
+            "dengan pratinjau di browser.",
 
         image: "images/products/ui-kit.png",
+
+        options: [
+            {
+                name: "Design tokens",
+                note: "tokens.css (variabel CSS) & tokens.json — warna, tipografi, spasi, radius"
+            },
+            {
+                name: "Komponen CSS",
+                note: "components.css — dt-btn, dt-card, dt-field, dt-badge, dt-chip, dt-row, dt-switch"
+            },
+            {
+                name: "SwiftUI",
+                note: "ios/Components.swift — komponen memakai token yang sama"
+            },
+            {
+                name: "Jetpack Compose",
+                note: "android/Components.kt — komponen Android dengan token sama"
+            },
+            {
+                name: "Pratinjau",
+                note: "index.html (buka di browser) + PREVIEW.png + README"
+            }
+        ],
 
         link: SITE_CONFIG.storeUrl,
 
@@ -229,10 +273,35 @@ const products = [
         price: "Rp100.000",
 
         description:
-            "Bundle resources digital untuk creator, " +
-            "designer, dan developer.",
+            "10 template post 1080×1080 dengan file " +
+            "sumber HTML-nya, kalender konten 30 hari, " +
+            "12 prompt caption, brand kit isi-sendiri, " +
+            "dan panduan lisensi aset.",
 
         image: "images/products/digital-bundle.png",
+
+        options: [
+            {
+                name: "10 PNG 1080×1080",
+                note: "Sampul seri, tips, promo, kutipan, checklist, tutorial, cerita, cara beli, event, CTA"
+            },
+            {
+                name: "10 file HTML",
+                note: "Sumber tiap post — ganti teks dan warna, ekspor ulang"
+            },
+            {
+                name: "Kalender 30 hari",
+                note: "kalender-konten-30-hari.csv & .md — satu topik per hari"
+            },
+            {
+                name: "12 prompt caption",
+                note: "prompt-caption.md — promosi, edukasi, brand, dan hook"
+            },
+            {
+                name: "Brand kit & lisensi",
+                note: "brand-kit.html (isi-sendiri), panduan-lisensi-aset.md, README"
+            }
+        ],
 
         link: SITE_CONFIG.storeUrl,
 

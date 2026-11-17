@@ -100,28 +100,58 @@ Menampilkan tombol "Buy Now" yang mengarah ke produk yang tidak ada = pembeli ka
 
 ---
 
-## 5. Isi paket: E-Book Programming (BELUM DIISI)
+## 5. Isi paket: SUDAH TERISI (5 produk, 21 item)
 
-Kamu meminta **setiap produk punya aneka pilihan**. Untuk **Website Template** sudah jadi —
-di kartu muncul 5 pilihan nyata: AURELIA, NEXORA, NOVA, ORION, YOURBRAND
-(semuanya sesuai file yang memang ada di repo).
+Semua produk berbayar kini punya blok **"Isi paket"** di kartu, dan isinya
+**disalin dari file yang benar-benar ada** di folder `C:\Users\user\Documents\DAFFTECH produk jualan\`:
 
-Untuk **E-Book Programming** saya **tidak mengarang judul**, karena tidak ada file
-e-book di repo ini. Pembeli akan menagih kalau isi paketnya tidak ada.
+| Produk | Item | Isi |
+|---|---|---|
+| Website Template | 5 | AURELIA, NEXORA, NOVA, ORION, YOURBRAND |
+| E-Book Programming | 3 | PDF 12 halaman, versi HTML+CSS, README & lisensi |
+| AI Productivity Tools | 3 | PDF 10 halaman, versi HTML+CSS, README & lisensi |
+| Modern UI Kit | 5 | tokens (css+json), components.css, SwiftUI, Jetpack Compose, pratinjau |
+| Digital Creator Bundle | 5 | 10 PNG, 10 HTML, kalender 30 hari, 12 prompt, brand kit & lisensi |
 
-Isi sendiri di `js/products.js`, cari blok produk `id: 3` lalu ganti `options: []`:
+Kalau nanti kamu menambah/mengurangi file produk, **perbarui juga** `options`
+di `js/products.js` DAN data di `C:\Users\user\AppData\Local\Temp\opencode\site\detail-data.mjs`
+lalu jalankan ulang `node site/build.mjs` — supaya kartu di beranda dan halaman
+detail tidak pernah saling bertentangan.
 
-```js
-options: [
-    { name: "Judul E-Book 1", note: "Isi singkatnya apa" },
-    { name: "Judul E-Book 2", note: "Isi singkatnya apa" },
-    { name: "Judul E-Book 3", note: "Isi singkatnya apa" },
-],
+---
+
+## 5b. Backend serverless (Vercel) — form jalan di server
+
+Sudah ada kode backend siap pakai di repo:
+
+```
+api/contact.js     → POST /api/contact    (form kontak)
+api/subscribe.js   → POST /api/subscribe  (newsletter)
+api/health.js      → GET  /api/health     (cek status)
+vercel.json        → header keamanan + no-store untuk /api
 ```
 
-Begitu diisi, otomatis tampil blok **"Isi paket · 3 pilihan"** di kartu produk.
-Produk lain (`AI Productivity Tools`, `Modern UI Kit`, `Digital Creator Bundle`)
-juga tinggal ditambah `options` dengan cara yang sama.
+**Cara mengaktifkan (sekali saja):**
+
+1. Buka [vercel.com](https://vercel.com) → **Add New → Project** → impor repo `daffaull18` (framework: **Other**, tidak perlu build command).
+2. Di **Environment Variables** isi tiga pasangan ini (nilai dari dashboard EmailJS → *API Keys* / *Services* / *Templates*):
+
+   | Nama variabel | Isi dengan |
+   |---|---|
+   | `EMAILJS_PUBLIC_KEY` | Public Key EmailJS (sama dengan `publicKey` di `js/config.js`) |
+   | `EMAILJS_SERVICE_ID` | Service ID (sama dengan `serviceId` di `js/config.js`) |
+   | `EMAILJS_TEMPLATE_ID` | Template ID untuk form kontak |
+
+   Opsional: `EMAILJS_NEWSLETTER_TEMPLATE_ID` (template khusus newsletter — kalau kosong dipakai template kontak).
+3. **Deploy**. Selesai — sekarang form kontak dikirim lewat server (`/api/contact`), bukan langsung dari browser.
+
+**Cara kerja form (dual jalur, tidak pernah berbohong):**
+
+- Buka `https://namamu.vercel.app/api/health` → `{"ok":true,"email_configured":true}` berarti backend siap.
+- Kalau situs masih dibuka dari **GitHub Pages** (`/api/*` tidak ada), form otomatis **jatuh ke EmailJS browser** — fitur tetap jalan.
+- Kalau keduanya gagal, muncul pesan error jujur + tautan email. Form **tidak pernah** menampilkan "terkirim" bila memang gagal.
+
+> Catatan: di GitHub Pages, endpoint `/api/*` memang tidak ada (situs statis) — itu normal dan sudah ditangani. Mau form sepenuhnya lewat server? Deploy ke Vercel seperti langkah di atas, lalu pakai URL Vercel untuk berbagi tautan.
 
 ---
 

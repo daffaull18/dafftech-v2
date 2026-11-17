@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hubungi DAFFTECH: form kontak, email hello@dafftech.id, dan tautan toko Lynk.id. Balasan 1–2 hari kerja.">
+    <meta name="theme-color" content="#f3f0e9">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="DAFFTECH">
+    <link rel="canonical" href="https://daffaull18.github.io/dafftech-v2/kontak.html">
+    <title>Kontak — DAFFTECH</title>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DAFFTECH">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="Kontak — DAFFTECH">
+    <meta property="og:description" content="Hubungi DAFFTECH: form kontak, email hello@dafftech.id, dan tautan toko Lynk.id. Balasan 1–2 hari kerja.">
+    <meta property="og:url" content="https://daffaull18.github.io/dafftech-v2/kontak.html">
+    <meta property="og:image" content="https://daffaull18.github.io/dafftech-v2/images/hero-showcase.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kontak — DAFFTECH">
+    <meta name="twitter:description" content="Hubungi DAFFTECH: form kontak, email hello@dafftech.id, dan tautan toko Lynk.id. Balasan 1–2 hari kerja.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="DAFFTECH Beranda">
+                <img src="images/logo-mark-white.png" alt="Logo DAFFTECH">
+                <span>DAFF<span>TECH</span></span>
+            </a>
+            <nav class="navbar" id="navbar">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="produk.html" class="nav-link">Produk</a>
+                <a href="index.html#beli" class="nav-link">Cara Beli</a>
+                <a href="jasa.html" class="nav-link">Jasa</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="kontak.html" class="nav-link active">Kontak</a>
+            </nav>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" type="button" aria-label="Ganti tema terang atau gelap">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <a href="produk.html" class="header-btn">Lihat produk<i class="fa-solid fa-arrow-right"></i></a>
+                <button class="menu-btn" id="menu-btn" aria-label="Buka menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="page-hero">
+            <div class="container">
+                <div class="crumb"><a href="index.html">Beranda</a> / Kontak</div>
+                <h1>Ngobrol dulu, <em>belakangan.</em></h1>
+                <p class="lead">
+                    Ada pertanyaan sebelum beli, butuh penawaran jasa, atau ada
+                    yang keliru di situs ini? Kirim pesan — dibaca manusia, dibalas
+                    secepatnya.
+                </p>
+                <div class="hero-meta">
+                    <span class="tag brand">hello@dafftech.id</span>
+                    <span class="tag">Balasan 1–2 hari kerja</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="inner">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="form-card">
+                        <h2 style="font-size:24px;margin-bottom:6px">Kirim pesan</h2>
+                        <p style="color:var(--muted);font-size:14.5px;margin-bottom:22px">
+                            Isi form di bawah, atau kirim langsung ke email di samping.
+                        </p>
+
+                        <form id="contact-form" novalidate>
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="cf-name">Nama</label>
+                                    <input type="text" id="cf-name" name="name" autocomplete="name" required placeholder="Nama kamu">
+                                </div>
+                                <div class="field">
+                                    <label for="cf-email">Email</label>
+                                    <input type="email" id="cf-email" name="email" autocomplete="email" required placeholder="nama@email.com">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="cf-subject">Subjek</label>
+                                <select id="cf-subject" name="subject">
+                                    <option>Pertanyaan sebelum beli</option>
+                                    <option>Penawaran jasa</option>
+                                    <option>Masalah dengan produk</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="cf-message">Pesan</label>
+                                <textarea id="cf-message" name="message" required placeholder="Tulis pesanmu di sini..."></textarea>
+                            </div>
+                            <button class="btn-submit" type="submit">Kirim pesan</button>
+                            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+
+                    <aside class="panel">
+                        <ul class="p-pack" style="margin-top:0;padding-top:0;border-top:none">
+                            <li><strong><i class="fa-solid fa-envelope" style="color:var(--accent)"></i> Email</strong>
+                                <a href="mailto:hello@dafftech.id" style="color:var(--accent)">hello@dafftech.id</a>
+                            </li>
+                            <li><strong><i class="fa-solid fa-store" style="color:var(--accent)"></i> Toko</strong>
+                                <a href="https://lynk.id/dafftech" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">lynk.id/dafftech</a>
+                            </li>
+                            <li><strong><i class="fa-solid fa-clock" style="color:var(--accent)"></i> Waktu balas</strong>
+                                1–2 hari kerja. Pesan di akhir pekan dibalas Senin.
+                            </li>
+                            <li><strong><i class="fa-solid fa-circle-question" style="color:var(--accent)"></i> Pertanyaan umum</strong>
+                                Cek <a href="index.html#faq" style="color:var(--accent)">FAQ</a> dulu — kemungkinan besar sudah dijawab di sana.
+                            </li>
+                        </ul>
+                        <div class="note" style="margin-top:18px">
+                            Untuk masalah produk yang sudah dibela, sertakan email yang
+                            dipakai saat membeli supaya kami bisa mengecek lebih cepat.
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="container footer-main">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="images/logo-mark-white.png" alt="Logo DAFFTECH">
+                    <span>DAFF<span>TECH</span></span>
+                </a>
+                <p>Enam produk digital yang dibuat sendiri: template website, portfolio, e-book, UI kit, dan resource creator.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/d_a_p_p_u_l/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@d_a_p_p_u_l" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://github.com/daffaull18" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Jelajahi</h4>
+                <a href="produk.html">Semua Produk</a>
+                <a href="index.html#beli">Cara Beli</a>
+                <a href="tentang.html">Tentang</a>
+                <a href="jasa.html">Jasa</a>
+                <a href="kontak.html">Kontak</a>
+            </div>
+            <div class="footer-links">
+                <h4>Bantuan</h4>
+                <a href="index.html#faq">FAQ</a>
+                <a href="blog.html">Blog</a>
+                <a href="https://lynk.id/dafftech" target="_blank" rel="noopener noreferrer">Toko Lynk.id</a>
+                <a href="mailto:hello@dafftech.id">Email kami</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="privasi.html">Kebijakan Privasi</a>
+                <a href="syarat.html">Syarat &amp; Ketentuan</a>
+                <a href="produk.html">Koleksi Produk</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; <span id="current-year"></span> DAFFTECH. Harga dalam Rupiah, pembayaran lewat Lynk.id.</p>
+            <span>Dibuat &amp; dirawat di Indonesia.</span>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/forms.js"></script>
+</body>
+</html>
