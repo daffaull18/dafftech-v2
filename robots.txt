@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# file produk berbayar tidak boleh diakses langsung
+Disallow: /*.zip$
+
+Sitemap: https://daffaull18.github.io/dafftech-v2/sitemap.xml

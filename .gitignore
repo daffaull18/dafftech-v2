@@ -1,0 +1,22 @@
+# ============================================================
+# Produk berbayar — HANYA dijual lewat Lynk.id.
+# Jangan pernah file ini masuk ke repo publik lagi.
+# (aslinya disimpan di: C:\Users\user\Documents\DAFFTECH produk jualan\)
+# ============================================================
+
+AURELIA-WEBSITE-TEMPLATE-V1.zip
+NEXORA-WEBSITE-TEMPLATE-V1.zip
+NOVA-WEBSITE-TEMPLATE-V1.zip
+ORION-WEBSITE-TEMPLATE-V1.zip
+YOURBRAND-WEBSITE-TEMPLATE.zip
+DAFFTECH WEBSITE TEMPLATES BUNDLE.zip
+
+AURELIA WEBSITE TEMPLATE V1/
+NEXORA-WEBSITE-TEMPLATE-V1/
+NOVA WEBSITE TEMPLATE V1/
+ORION WEBSITE TEMPLATE V1/
+YOURBRAND-WEBSITE-TEMPLATE/
+
+# artefak build / lokal
+node_modules/
+*.log

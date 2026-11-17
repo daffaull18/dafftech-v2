@@ -209,41 +209,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 try {
 
-                    /* Load EmailJS SDK if it is not loaded yet */
+                    /* Load & init EmailJS SDK */
 
-                    if (!window.emailjs) {
-
-                        await new Promise(
-                            (resolve, reject) => {
-
-                                const script =
-                                    document.createElement("script");
-
-                                script.src =
-                                    "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-
-                                script.onload =
-                                    resolve;
-
-                                script.onerror =
-                                    reject;
-
-                                document.head.appendChild(
-                                    script
-                                );
-
-                            }
-                        );
-
-                    }
+                    await ensureEmailJS();
 
 
-                    /* Initialize EmailJS */
-
-                    emailjs.init({
-                        publicKey:
-                            "SJ70N4sQOA7hLTaYO"
-                    });
+                    const emailConfig =
+                        SITE_CONFIG.emailjs || {};
 
 
                     /* Data sent to EmailJS template */
@@ -261,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     /* Send email */
 
                     await emailjs.send(
-                        "service_ieexk0e",
-                        "template_z3p8ihr",
+                        emailConfig.serviceId,
+                        emailConfig.contactTemplateId,
                         templateParams
                     );
 
@@ -313,6 +285,248 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
         );
+
+    }
+
+
+    /* ==================================================
+       LOAD EMAILJS SDK (dipakai kontak & newsletter)
+    ================================================== */
+
+    async function ensureEmailJS() {
+
+        if (window.emailjs) {
+            return window.emailjs;
+        }
+
+
+        await new Promise((resolve, reject) => {
+
+            const script =
+                document.createElement("script");
+
+            script.src =
+                "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+
+            script.onload = resolve;
+            script.onerror = reject;
+
+            document.head.appendChild(script);
+
+        });
+
+
+        const emailConfig =
+            SITE_CONFIG.emailjs || {};
+
+        window.emailjs.init({
+            publicKey: emailConfig.publicKey || ""
+        });
+
+
+        return window.emailjs;
+
+    }
+
+
+    /* ==================================================
+       NEWSLETTER  ->  EMAIL LIST (daftar langganan)
+       --------------------------------------------------
+       Pengunjung memasukkan email, datang ke inbox milikmu.
+       Bila newsletterTemplateId diisi (template khusus di
+       EmailJS), pakai template itu. Kalau masih kosong,
+       memakai template kontak yang sudah ada.
+    ================================================== */
+
+    const newsletterForm =
+        document.getElementById("newsletter-form");
+
+    const newsletterStatus =
+        document.getElementById("newsletter-status");
+
+
+    if (newsletterForm) {
+
+        newsletterForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const emailInput =
+                    document.getElementById("newsletter-email");
+
+                const email =
+                    emailInput?.value.trim() || "";
+
+
+                const validEmail =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+
+                if (!validEmail) {
+
+                    if (newsletterStatus) {
+
+                        newsletterStatus.textContent =
+                            "Masukkan alamat email yang benar.";
+
+                        newsletterStatus.className =
+                            "form-status error";
+
+                    }
+
+                    return;
+
+                }
+
+
+                if (newsletterStatus) {
+
+                    newsletterStatus.textContent =
+                        "Mendaftarkan...";
+
+                    newsletterStatus.className =
+                        "form-status";
+
+                }
+
+
+                try {
+
+                    await ensureEmailJS();
+
+
+                    const emailConfig =
+                        SITE_CONFIG.emailjs || {};
+
+
+                    await emailjs.send(
+                        emailConfig.serviceId,
+                        emailConfig.newsletterTemplateId ||
+                        emailConfig.contactTemplateId,
+                        {
+                            name: "(Newsletter)",
+                            email: email,
+                            subject:
+                                "Newsletter signup - " + email,
+                            message:
+                                "Email baru ingin berlangganan " +
+                                "newsletter DAFFTECH: " + email
+                        }
+                    );
+
+
+                    if (newsletterStatus) {
+
+                        newsletterStatus.textContent =
+                            "Berhasil! Email kamu sudah terdaftar.";
+
+                        newsletterStatus.className =
+                            "form-status success";
+
+                    }
+
+                    newsletterForm.reset();
+
+                } catch (error) {
+
+                    console.error(
+                        "Newsletter Error:",
+                        error
+                    );
+
+
+                    if (newsletterStatus) {
+
+                        newsletterStatus.textContent =
+                            "Gagal mendaftar. Coba lagi atau " +
+                            "email ke " +
+                            (SITE_CONFIG.email || "hello@dafftech.id") +
+                            ".";
+
+                        newsletterStatus.className =
+                            "form-status error";
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       STICKY CTA (mobile)
+       disembunyikan saat pengunjung sudah sampai
+       di kontak / footer agar tidak menutupi isi
+    ================================================== */
+
+    const stickyCta =
+        document.getElementById("sticky-cta");
+
+
+    if (stickyCta) {
+
+        const hideZones = [
+            document.getElementById("contact"),
+            document.querySelector(".footer")
+        ].filter(Boolean);
+
+
+        let stickyFrame = false;
+
+
+        function updateStickyCta() {
+
+            stickyFrame = false;
+
+
+            const limit =
+                window.innerHeight - 60;
+
+
+            const shouldHide = hideZones.some(zone => {
+
+                const rect =
+                    zone.getBoundingClientRect();
+
+                return rect.top < limit;
+
+            });
+
+
+            stickyCta.classList.toggle(
+                "is-hidden",
+                shouldHide
+            );
+
+        }
+
+
+        window.addEventListener("scroll", () => {
+
+            if (!stickyFrame) {
+
+                stickyFrame = true;
+
+                requestAnimationFrame(updateStickyCta);
+
+            }
+
+        }, { passive: true });
+
+
+        window.addEventListener(
+            "resize",
+            updateStickyCta
+        );
+
+
+        updateStickyCta();
 
     }
 
@@ -395,47 +609,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================================
    DAFFTECH DARK / LIGHT MODE
-========================================= */
+   ----------------------------------------
+   aturan warna memakai `body.light-mode`
+   sebagai override, jadi mode gelap berarti
+   kelas light-mode DILEPAS.
+   ========================================= */
 
-const themeToggle = document.getElementById("theme-toggle");
+const themeToggle =
+    document.getElementById("theme-toggle");
 
-if (themeToggle) {
 
-    // Cek tema yang pernah dipilih
-    const savedTheme = localStorage.getItem("dafftech-theme");
+function applyTheme(mode) {
 
-    if (savedTheme !== "dark") {
-        document.body.classList.add("light-mode");
-        themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-        document.body.classList.add("dark-mode");
-    }
+    const isLight = mode === "light";
 
-    /// Tombol toggle
-    themeToggle.addEventListener("click", () => {
 
-        document.body.classList.toggle("light-mode");
-        document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle(
+        "light-mode",
+        isLight
+    );
 
-        const isLightMode =
-            document.body.classList.contains("light-mode");
 
-        themeToggle.innerHTML = isLightMode
+    if (themeToggle) {
+
+        themeToggle.innerHTML = isLight
             ? '<i class="fa-solid fa-sun"></i>'
             : '<i class="fa-solid fa-moon"></i>';
 
-        // Ganti logo sesuai mode
-        const logo = document.getElementById("sitelogo");
+    }
 
-        if (logo) {
-            logo.src = isLightMode
-                ? "images/logo-light.png"
-                : "images/logo.png";
-        }
 
+    const logo =
+        document.getElementById("sitelogo");
+
+    if (logo) {
+
+        logo.src = isLight
+            ? "images/logo-mark-ink.png"
+            : "images/logo-mark-white.png";
+
+    }
+
+
+    /* localStorage bisa diblokir browser
+       (private mode / tracking protection) */
+
+    try {
         localStorage.setItem(
             "dafftech-theme",
-            isLightMode ? "light" : "dark"
+            mode
         );
+    } catch (error) {
+        /* abaikan */
+    }
+
+}
+
+
+if (themeToggle) {
+
+    let savedTheme = null;
+
+    try {
+        savedTheme =
+            localStorage.getItem("dafftech-theme");
+    } catch (error) {
+        savedTheme = null;
+    }
+
+
+    applyTheme(
+        savedTheme === "dark" ? "dark" : "light"
+    );
+
+
+    themeToggle.addEventListener("click", () => {
+
+        const isLight =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+        applyTheme(
+            isLight ? "dark" : "light"
+        );
+
     });
+
 }
