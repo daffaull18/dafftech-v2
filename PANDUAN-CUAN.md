@@ -194,10 +194,15 @@ Padahal isinya **persis** paket yang dijual Rp35.000.
 2. Ditambahkan `.gitignore` supaya file itu tidak pernah masuk repo lagi.
 3. `robots.txt` punya baris `Disallow: /*.zip$` (hanya himbauan ke crawler).
 
-**Sisa yang harus diputuskan:** file lama masih ada di **riwayat git GitHub**
-(commit lama tetap bisa diunduh selama repo publik). Untuk benar-benar bersih,
-riwayat lama harus dihapus (`git filter-repo` + `git push --force`) —
-tanyakan dulu sebelum dilakukan karena ini menimpa seluruh riwayat repo.
+**Riwayat juga sudah dibersihkan** (git filter-branch + force push, 17 Nov 2026):
+seluruh commit lama ditulis ulang, sehingga file berbayar **tidak bisa diunduh lagi**
+dari GitHub — halaman repo kini hanya berisi file situs. Cadangan lengkap sebelum
+pembersihan disimpan sebagai `.bundle` di luar repo
+(`C:\Users\user\AppData\Local\Temp\opencode\dafftech-v2-backup-*.bundle`).
+
+Catatan jujur: orang yang sempat mengunduh file sebelum pembersihan masih
+menyimpan salinannya — pembersihan tidak bisa menarik kembali yang sudah terlanjur
+diunduh. Untuk rilis berikutnya, jangan pernah menaruh file produk di repo.
 
 ---
 
