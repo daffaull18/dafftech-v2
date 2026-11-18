@@ -61,6 +61,7 @@ ${T(x, y + 102, hex, { mono: true, size: 12, fill: C.ink500 })}`;
 
     brand.forEach((n, i) => (b += swatch(48 + i * 170, 190, n, brandHex[i])));
     b += T(48, 330, "GRADASI MEREK — linear-gradient(160deg, #BF7BF6 0%, #913BD0 100%)", { mono: true, size: 12, fill: C.ink500 });
+    b += R(760, 306, 632, 40, { r: 10, fill: "url(#grad)", stroke: C.paper200, sw: 1 });
 
     ink.forEach((n, i) => (b += swatch(48 + i * 170, 370, n, inkHex[i], i > 3)));
     b += T(48, 520, "STATUS", { mono: true, size: 12, fill: C.brand700, weight: 600 });
@@ -68,17 +69,37 @@ ${T(x, y + 102, hex, { mono: true, size: 12, fill: C.ink500 })}`;
     b += T(48, 680, "MODE GELAP — [data-theme=\"dark\"]", { mono: true, size: 12, fill: C.brand700, weight: 600 });
     darks.forEach((n, i) => (b += swatch(48 + i * 170, 700, n, darkHex[i], true)));
 
-    // tipografi
+    // tipografi — dua kolom: Inter (kiri) dan JetBrains Mono (kanan)
     b += T(48, 870, "TIPOGRAFI — Inter (sans) · JetBrains Mono (mono)", { mono: true, size: 13, fill: C.brand700, weight: 600 });
     const fs = [["3xl", 36, 700], ["2xl", 28, 700], ["xl", 22, 600], ["lg", 18, 600], ["base", 16, 400], ["sm", 14, 400], ["xs", 12, 400]];
     let ty = 914;
     fs.forEach(([n, px, w]) => {
         b += T(48, ty, `Aa — ${n} · ${px}px / ${w}`, { size: 13, fill: C.ink500, mono: true });
         b += T(320, ty, "Membaca teks dengan nyaman", { size: px, weight: w });
+        b += T(880, ty, "Rp50.000 · 0123456789", { size: px, weight: w, mono: true });
         ty += px + 22;
     });
 
-    writeFileSync(`${OUT}\\01-foundations.svg`, svg(1440, 1300, b));
+    // ruang & sudut — nilai diambil persis dari tokens.css
+    b += T(48, 1250, "RUANG — skala 4px (panjang batang = ukuran asli 1:1)", { mono: true, size: 13, fill: C.brand700, weight: 600 });
+    const sps = [["sp-1", 4], ["sp-2", 8], ["sp-3", 12], ["sp-4", 16], ["sp-5", 24], ["sp-6", 32], ["sp-7", 48], ["sp-8", 64]];
+    sps.forEach(([n, v], i) => {
+        const x = 48 + (i % 2) * 700;
+        const y = 1280 + Math.floor(i / 2) * 36;
+        b += T(x, y + 15, `--${n} · ${v}px`, { mono: true, size: 12, fill: C.ink500 });
+        b += R(x + 170, y, v, 20, { r: 4, fill: C.brand300, stroke: C.paper200, sw: 1 });
+    });
+
+    b += T(48, 1462, "SUDUT — --r-sm 6 · --r-md 10 · --r-lg 16 · --r-xl 24 · --r-full 999", { mono: true, size: 13, fill: C.brand700, weight: 600 });
+    const rs = [["r-sm", 6], ["r-md", 10], ["r-lg", 16], ["r-xl", 24], ["r-full", 999]];
+    rs.forEach(([n, v], i) => {
+        const x = 48 + i * 170;
+        b += R(x, 1484, 64, 64, { r: Math.min(v, 32), fill: C.brand100, stroke: C.brand700, sw: 1.5 });
+        b += T(x, 1572, n, { size: 13, weight: 600 });
+        b += T(x, 1590, v === 999 ? "999px (pil)" : `${v}px`, { mono: true, size: 12, fill: C.ink500 });
+    });
+
+    writeFileSync(`${OUT}\\01-foundations.svg`, svg(1440, 1630, b));
 }
 
 /* ============ PAPAN 2: TOMBOL ============ */
