@@ -114,7 +114,7 @@ Semua produk berbayar kini punya blok **"Isi paket"** di kartu, dan isinya
 | Digital Creator Bundle | 5 | 10 PNG, 10 HTML, kalender 30 hari, 12 prompt, brand kit & lisensi |
 
 Kalau nanti kamu menambah/mengurangi file produk, **perbarui juga** `options`
-di `js/products.js` DAN data di `C:/Users/user/OneDrive/Desktop/project Dinzz\site\detail-data.mjs`
+di `js/products.js` DAN data di `site/detail-data.mjs`
 lalu jalankan ulang `node site/build.mjs` — supaya kartu di beranda dan halaman
 detail tidak pernah saling bertentangan.
 
@@ -227,8 +227,8 @@ Padahal isinya **persis** paket yang dijual Rp35.000.
 **Riwayat juga sudah dibersihkan** (git filter-branch + force push, 17 Nov 2026):
 seluruh commit lama ditulis ulang, sehingga file berbayar **tidak bisa diunduh lagi**
 dari GitHub — halaman repo kini hanya berisi file situs. Cadangan lengkap sebelum
-pembersihan disimpan sebagai `.bundle` di luar repo
-(`C:/Users/user/OneDrive/Desktop/project Dinzz\dafftech-v2-backup-*.bundle`).
+pembersihan disimpan sebagai `.bundle` di folder `dafftech-v2-backup/`
+(di dalam folder project, sudah masuk `.gitignore`).
 
 Catatan jujur: orang yang sempat mengunduh file sebelum pembersihan masih
 menyimpan salinannya — pembersihan tidak bisa menarik kembali yang sudah terlanjur

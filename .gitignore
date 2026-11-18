@@ -20,3 +20,12 @@ YOURBRAND-WEBSITE-TEMPLATE/
 # artefak build / lokal
 node_modules/
 *.log
+
+# backup git (97 MB) — jangan pernah di-push
+*.bundle
+
+# artefak screenshot/poster lokal
+shots/*.png
+shots/poster/*.png
+shots/pages/*.png
+posters/*.png
